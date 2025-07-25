@@ -1,15 +1,28 @@
 ### Test connection with Redis driver  
-
-`mvn dependency:copy-dependencies -DoutputDirectory=target/dependency`  
-
-`java -cp "target/classes:lib/redis-jdbc.jar:target/dependency/*" RedisJdbcMethod`
   
-or  
+`az login`  
+choose your subscription  
   
-`mvn install:install-file -Dfile=lib/redis-jdbc.jar -DgroupId=redis-jdbc -DartifactId=redis-jdbc -Dversion=1.0 -Dpackaging=jar`  
-    
-   
-### Test connection with Jedis
+`mvn install:install-file -Dfile=lib/redis-jdbc-driver-1.5.jar -DgroupId=com.jetbrains.datagrip -DartifactId=redis-jdbc-driver -Dversion=1.5 -Dpackaging=jar`  
+`mvn clean compile`   
+`mvn exec:java -Dexec.mainClass="RedisJdbc"`
+
+### Test connection with Jedis  
+
+`az login`   
+choose your subscription  
 `mvn clean`    
 `mvn compile`    
-`mvn exec:java -Dexec.mainClass="RedisNoClean2"`    
+`mvn exec:java -Dexec.mainClass="JedisTest"`
+  
+  
+  
+### Can be useful
+`mvn dependency:copy-dependencies -DoutputDirectory=target/dependency`  
+`mvn versions:display-dependency-updates`  
+
+  
+
+    
+   
+
