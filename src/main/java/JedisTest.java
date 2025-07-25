@@ -19,8 +19,8 @@ public class JedisTest {
             System.out.println("=== Getting token from Microsoft Entra ID ===\n");
 
             String redisHostname = promptWithDefault("Redis hostname", "DGredis.redis.cache.windows.net");
+            String objectId = promptWithDefault("Object ID", "my_id");
             int redisPort = Integer.parseInt(promptWithDefault("Redis port", "6380"));
-            String objectId = promptWithDefault("Object ID", "my_token");
             String sslEnabled = promptWithDefault("SSL enabled", "true");
 
             // Getting token from Azure Entra ID
@@ -53,18 +53,18 @@ public class JedisTest {
 
             // Connecting to Redis
             try (Jedis jedis = new Jedis(redisHostname, redisPort, config)) {
-                System.out.println("Connected to Redis");
+                System.out.println("Connected to Redis \n");
 
                 // Test PING
                 System.out.println("Test: PING");
                 String pingResponse = jedis.ping();
-                System.out.println("response: " + pingResponse);
+                System.out.println("response: " + pingResponse + "\n");
 
                 // Test SET/GET
                 System.out.println("Test: SET/GET");
                 jedis.set("hello", "world from Azure Redis Cache!");
                 String value = jedis.get("hello");
-                System.out.println("GET hello: " + value);
+                System.out.println("GET hello: " + value + "\n");
             }
 
             System.out.println("Redis tests completed successfully.");

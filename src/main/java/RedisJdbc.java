@@ -22,9 +22,9 @@ public class RedisJdbc {
             System.out.println("=== Getting token MS Entra ID ===\n");
             // Interactive input for connection parameters
             String redisHostname = promptWithDefault("Redis hostname", "DGredis.redis.cache.windows.net");
+            String objectId = promptWithDefault("Object ID", "my_id");
             int redisPort = Integer.parseInt(promptWithDefault("Redis port", "6380"));
             String databaseName = promptWithDefault("Database", "0");
-            String objectId = promptWithDefault("Object ID", "my_token");
             String sslEnabled = promptWithDefault("SSL enabled", "true");
 
             // Create Azure credential
