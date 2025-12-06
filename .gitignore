@@ -31,3 +31,5 @@ bin/
 ### Results ###
 redis_token.txt
 jedis_token.txt
+
+.envToken
