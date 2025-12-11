@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -24,8 +25,9 @@ public class Main {
         String authToken = root.get("accessToken").asText();
 
         // Results
-        RedisJDBCConnection.connect(hostname, port, objectId, authToken);
-        System.out.println();
         RedisJedisConnection.connect(hostname, port, objectId, authToken);
+        System.out.println();
+        RedisJDBCConnection.connect(hostname, port, objectId, authToken);
+
     }
 }
