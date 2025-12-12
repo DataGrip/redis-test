@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         // Fill in your credentials
-        String hostname = "DGredis.redis.cache.windows.net";
-        String objectId = "42e8dcac-c4f0-4dd2-841a-604167fc8eee"; // Your user ID in Azure
+        String hostname = "DGredis.redis.cache.windows.net";  // Redis hostname
+        String objectId = ""; // Set your Object ID
         int port = 6380;
 
         JsonNode root = null;
