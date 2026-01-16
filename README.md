@@ -1,4 +1,4 @@
-### Browser-based authentication
+## Browser-based authentication
 
 Azure log in  
 `az login` or `az login --use-device-code`
