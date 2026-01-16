@@ -26,6 +26,8 @@ public class RedisJedisConnection {
             System.out.println("GET test key: " + jedis.get("test_key"));
             if (!"hello".equals(jedis.get("test_key"))) {
                 System.out.println("SET/GET test failed: " + jedis.get("test_key"));
+            } else {
+                System.out.println("Success!");
             }
 
             jedis.close();
@@ -33,6 +35,5 @@ public class RedisJedisConnection {
         } catch (Exception e) {
             throw new RuntimeException("Redis connection failed: " + e.getMessage(), e);
         }
-
     }
 }

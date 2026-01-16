@@ -9,11 +9,13 @@ import redis.clients.jedis.authentication.AuthXManager;
 public class RedisJDBCConnection {
 
     public static void testJDBC(String hostname, int port, TokenAuthConfig tokenAuthConfig) {
-        String objectId = ""; // set app objectID
+        String objectId = ""; // set app Object ID
+        AuthXManager authXManager = new AuthXManager(tokenAuthConfig);
         try {
             Class.forName("jdbc.RedisDriver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            authXManager.stop();
             return;
         }
 
@@ -25,8 +27,6 @@ public class RedisJDBCConnection {
         AtomicReference<String> tokenHolder = new AtomicReference<>();
         CountDownLatch latch = new CountDownLatch(1);
 
-        AuthXManager authXManager = new AuthXManager(tokenAuthConfig);
-
         authXManager.addPostAuthenticationHook((token) -> {
             String accessToken = token.getValue();
             tokenHolder.set(accessToken);
@@ -36,7 +36,7 @@ public class RedisJDBCConnection {
         authXManager.start();
 
         String token = tokenHolder.get().toString();
-        System.out.println("Token: " + token);
+        // System.out.println("Token: " + token);
 
         properties.setProperty("user", objectId);
         properties.setProperty("password", token);
@@ -54,25 +54,21 @@ public class RedisJDBCConnection {
                     System.out.println("No response from the host");
                     statement.close();
                     connection.close();
-                    return;
                 }
                 System.out.println("PING: " + rs.getString(1));
             }
 
             statement.execute("SET test_key \"hello\"");
-
             try (ResultSet rs = statement.executeQuery("GET test_key")) {
                 if (!rs.next()) {
                     System.out.println("Failed to retrieve test value");
                     statement.close();
                     connection.close();
-                    return;
                 }
                 System.out.println("GET test_key: " + rs.getString(1));
+                System.out.println("Success!");
+                authXManager.stop();
             }
-
-            System.out.println("Success!");
-
 
         } catch (Exception e) {
             e.printStackTrace();

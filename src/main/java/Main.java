@@ -11,10 +11,10 @@ public class Main {
         String SCOPES = "https://redis.azure.com/.default";
         String hostname = "DGredis.redis.cache.windows.net";
         int port = 6380;
-        // Fill in the app credentials
-        String clientId = "";
-        String secret = "";
-        String tenantId = "";
+        // Fill in the application credentials
+        String clientId = ""; // Client ID for app
+        String secret = ""; // Azure secret "Redis connection" for app (Value)
+        String tenantId = ""; // Tenant ID
         TokenAuthConfig tokenAuthConfig = null;
 
         try {
@@ -34,6 +34,8 @@ public class Main {
 
             System.out.println("=== Testing Jedis Connection ===");
             RedisJedisConnection.testJedis(hostname, port, config);
+
+            System.out.println(" ");
 
             System.out.println("=== Testing JDBC Connection ===");
             RedisJDBCConnection.testJDBC(hostname, port, tokenAuthConfig);
